@@ -10,24 +10,28 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     
 </head>
-<body class="">
+<body class="background">
+   <section>
     <div class="container">
         <div class="vh-100 d-flex justify-content-center ">
             <div class="row w-100">
-                <div class="col-12  mt-5  mx-auto">
+                <div class="col-6 d-flex justify-content-center">
+                    <img src="./assets/img/student-img.png" alt="">
+                </div>
+                <div class="col-6  mt-5  mx-auto">
                     <div class="box rounded shadow p-5">
                         <div class="pt-4 text-center">
-                            <h1>🎓 Student Application Form</h1>
+                            <h1>📚 Student Registration Form</h1>
                         </div>
                         <form id="stu-form" class="ps-3 pe-3 pb-5 pt-4">
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    <label for="firstname" class="fw-bold">First Name:</label>
-                                    <input type="text" class="form-control" id="firstname" placeholder="Enter Your First Name">
+                                    <label for="name" class="fw-bold">Name:</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Enter Your Name">
                                 </div>
                                 <div class="col-12  mb-3">
-                                    <label for="lastname" class="fw-bold">Last Name:</label>
-                                    <input type="text" class="form-control" id="lastname" placeholder="Enter Your Last Name">
+                                    <label for="grid" class="fw-bold">GRID:</label>
+                                    <input type="number" class="form-control" id="grid" placeholder="Enter Your grid">
                                 </div>
                             </div>
 
@@ -41,41 +45,41 @@
                                 <label for="course-select" class="fw-bold">Select Course:</label>
                                 <select id="course-select" class="form-control">
                                     <option value="">Choose your Course</option>
-                                    <option value="MCA">MCA</option>
+                                    <option value="BCOM">BCOM</option>
+                                    <option value="BBA">BBA</option>
                                     <option value="BCA">BCA</option>
-                                    <option value="MBA">MBA</option>
                                 </select>
                             </div>
 
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                                <button type="submit" class="btn btn-success my-1" id="submit">Submit</button>
                             </div>
                         </form>
 
                     </div>
-                    <h2 class="fw-bold mt-4 mb-0 text-center">Student Data</h2>
-                    <div class="table-box">
-                        <table class="table table-hover rounded table-bordered mt-3">
-                            <thead class="table">
-                                <tr>
-                                    <th class="text-uppercase fw-bold">Name</th>
-                                 
-                                    <th class="text-uppercase fw-bold">Email Id</th>
-                                    <th class="text-uppercase fw-bold">Course</th>
-                                 
-                                    <th><i class="bi bi-pencil-square"></i></th>
-                                    <th><i class="bi bi-trash"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTable"></tbody>
-                        </table>
-                    </div>
+                </div>
+                <h2 class="fw-bold mt-4 mb-0 text-center">Student Detail</h2>
+                <div class="table-box">
+                    <table class="table table-hover rounded table-bordered mt-3">
+                        <thead class="table">
+                            <tr>
+                                <th class="text-uppercase fw-bold">Name</th>
+                                <th class="text-uppercase fw-bold">GRID</th>
+                                <th class="text-uppercase fw-bold">Email Id</th>
+                                <th class="text-uppercase fw-bold">Course</th>
+                                <th><i class="bi bi-pencil-square"></i></th>
+                                <th><i class="bi bi-trash"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentDetail"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div> 
 
+   </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script src="./index.js"></script>
 </body>

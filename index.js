@@ -1,12 +1,9 @@
 class Student {
-    constructor(firstName, lastName, grid, contactNo, emailId, course, gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    constructor(name, grid, emailId, course) {
+        this.name = name;
         this.grid = grid;
-        this.contactNo = contactNo;
         this.emailId = emailId;
         this.course = course;
-        this.gender = gender;
     }
 }
 
@@ -21,13 +18,14 @@ class StudentManage {
     }
 
     display() {
-        const table = document.getElementById("studentTable");
+        const table = document.getElementById("studentDetail");
         table.innerHTML = "";
 
         this.students.forEach((student, index) => {
             let row = `
                 <tr class="text-center">
-                    <td>${student.firstName} ${student.lastName}</td>
+                    <td>${student.name}</td>
+                    <td>${student.grid}</td>
                     <td>${student.emailId}</td>
                     <td>${student.course}</td>
                     
@@ -58,25 +56,38 @@ const manage = new StudentManage();
 let updateIndex = null;
 
 function createUpdateStudent() {
-    const firstName = document.getElementById("firstname").value.trim();
-    const lastName = document.getElementById("lastname").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const grid = document.getElementById("grid").value.trim();
     const emailId = document.getElementById("mail").value.trim();
     const course = document.getElementById("course-select").value;
 
+    const gridRegex = /^\d{4}$/;   
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
-    if (!firstName) {
-        Swal.fire("Validation Error", "Please enter your first name!", "error");
+    
+    if (!name) {
+        Swal.fire("Validation Error", "Please enter your name!", "error");
         return;
     }
-
-    if (!lastName) {
-        Swal.fire("Validation Error", "Please enter your last name!", "error");
+    
+    if (!grid) {
+        Swal.fire("Validation Error", "Please enter your grid!", "error");
+        return;
+    }
+    if (!gridRegex.test(grid)) {
+        Swal.fire({
+            text: "Enter A Valid GRID Number (4-digits) !",
+            icon: "error"
+        });
         return;
     }
 
     if (!emailId) {
         Swal.fire("Validation Error", "Please enter your email ID!", "error");
+        return;
+    }
+    if (!emailRegex.test(emailId)) {  
+        Swal.fire("Validation Error", "Please enter a valid email address!", "error");
         return;
     }
 
@@ -85,16 +96,12 @@ function createUpdateStudent() {
         return;
     }
 
-   
-
- 
     if (manage.students.some((record) => record.emailId === emailId && updateIndex === null)) {
         Swal.fire("Validation Error", "Email already exists!", "error");
         return;
     }
 
-
-    const student = new Student(firstName, lastName, "", "", emailId, course);
+    const student = new Student(name, grid, emailId, course);
 
     if (updateIndex === null) {
         manage.create(student);
@@ -128,16 +135,17 @@ function deleteStudent(idx) {
 
 function resetForm() {
     document.getElementById("stu-form").reset();
+    updateIndex = null;
+    document.getElementById("submit").textContent = "Submit";
 }
 
 function updateStudent(index) {
     const student = manage.students[index];
 
-    document.getElementById("firstname").value = student.firstName;
-    document.getElementById("lastname").value = student.lastName;
+    document.getElementById("name").value = student.name;
+    document.getElementById("grid").value = student.grid;
     document.getElementById("mail").value = student.emailId;
     document.getElementById("course-select").value = student.course;
-   
 
     updateIndex = index;
     document.getElementById("submit").textContent = "Update";
